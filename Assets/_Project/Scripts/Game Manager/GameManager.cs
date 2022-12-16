@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip scoreSound;
 
+    private void Initialization()
+    {
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,8 +82,8 @@ public class GameManager : MonoBehaviour
     public void AddScore(int value)
     {
         score += value;
-        scoreText.text = "Score: " + score.ToString();
-        audioSource.PlayOneShot(scoreSound);
+        //scoreText.text = "Score: " + score.ToString();
+        //audioSource.PlayOneShot(scoreSound);
     }
 
     public void ChangeScene(string scene)
