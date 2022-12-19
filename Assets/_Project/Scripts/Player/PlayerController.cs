@@ -4,12 +4,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D playerRigidBody2D;
+    private Animator playerAnimator;
 
     private GameManager gameManager;
+
+    private float horizontal;
 
     [SerializeField] private bool isOnTheGround;
 
     [Range(0, 500)] public float jumpForce;
+    [Range(0, 50)] public float speed;
+    public float speedY;
+    
+    public int speedX;
 
     public Transform groundCheck;
 
@@ -17,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         gameManager = FindObjectOfType(typeof(GameManager)) as GameManager;
         playerRigidBody2D = GetComponent<Rigidbody2D>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -26,13 +34,41 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        isOnTheGround = Physics2D.OverlapCircle(groundCheck.position, 0.02f);
+        GroundCheck();
     }
 
     // Update is called once per frame
     void Update()
     {
+        MovementControl();
         Jump();
+    }
+
+    private void LateUpdate()
+    {
+        AnimationsControl();
+    }
+
+    private void MovementControl()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal");
+
+        if(horizontal != 0)
+        {
+            speedX = 1;
+        }
+        else
+        {
+            speedX = 0;
+        }
+
+        speedY = playerRigidBody2D.velocity.y;
+        playerRigidBody2D.velocity = new(horizontal * speed, speedY);
+    }
+
+    private void GroundCheck()
+    {
+        isOnTheGround = Physics2D.OverlapCircle(groundCheck.position, 0.02f);
     }
 
     private void Jump()
@@ -41,6 +77,13 @@ public class PlayerController : MonoBehaviour
         {
             playerRigidBody2D.AddForce(new Vector2(0, jumpForce));
         }
+    }
+
+    private void AnimationsControl()
+    {
+        playerAnimator.SetInteger("SpeedX", speedX);
+        playerAnimator.SetBool("Grounded", isOnTheGround);
+        playerAnimator.SetFloat("SpeedY", speedY);
     }
 
     private void OnDrawGizmos()

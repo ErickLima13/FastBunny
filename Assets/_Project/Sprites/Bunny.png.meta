@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bunny_0
+      name: Idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -126,7 +126,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bunny_1
+      name: Idle_1
       rect:
         serializedVersion: 2
         x: 286
@@ -147,7 +147,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bunny_2
+      name: Jump_0
       rect:
         serializedVersion: 2
         x: 572
@@ -168,7 +168,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bunny_3
+      name: Jump_1
       rect:
         serializedVersion: 2
         x: 858
@@ -189,7 +189,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bunny_4
+      name: Jump_2
       rect:
         serializedVersion: 2
         x: 1144
@@ -210,7 +210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bunny_5
+      name: Hit_0
       rect:
         serializedVersion: 2
         x: 1430
@@ -231,7 +231,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bunny_6
+      name: Hit_1
       rect:
         serializedVersion: 2
         x: 1716
@@ -252,7 +252,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bunny_7
+      name: Walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -273,7 +273,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bunny_8
+      name: Walk_1
       rect:
         serializedVersion: 2
         x: 286
@@ -294,7 +294,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bunny_9
+      name: Walk_2
       rect:
         serializedVersion: 2
         x: 572
@@ -315,7 +315,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bunny_10
+      name: Walk_3
       rect:
         serializedVersion: 2
         x: 858
@@ -336,11 +336,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bunny_11
+      name: Run_0
       rect:
         serializedVersion: 2
-        x: 1144
-        y: 484
+        x: 1146
+        y: 482
         width: 286
         height: 270
       alignment: 7
@@ -357,7 +357,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bunny_12
+      name: Run_1
       rect:
         serializedVersion: 2
         x: 1430
@@ -388,19 +388,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bunny_9: 1469044690
-      Bunny_12: -542676064
-      Bunny_8: 473313139
-      Bunny_7: 1591755319
-      Bunny_4: -604166160
-      Bunny_6: -522684501
-      Bunny_2: -435034843
-      Bunny_0: 829680983
-      Bunny_3: 837561053
-      Bunny_1: -369290419
-      Bunny_11: -171005209
-      Bunny_5: 1712665542
-      Bunny_10: -1317637415
+      Jump_1: 837561053
+      Jump_2: -604166160
+      Idle_1: -369290419
+      Walk_0: 1591755319
+      Run_1: -542676064
+      Hit_1: -522684501
+      Idle_0: 829680983
+      Jump_0: -435034843
+      Walk_2: 1469044690
+      Hit_0: 1712665542
+      Walk_3: -1317637415
+      Walk_1: 473313139
+      Run_0: -171005209
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
