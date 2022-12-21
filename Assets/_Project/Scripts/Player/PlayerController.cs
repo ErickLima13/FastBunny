@@ -12,13 +12,15 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private bool isOnTheGround;
 
-    [Range(0, 500)] public float jumpForce;
+    [Range(0, 1000)] public float jumpForce;
     [Range(0, 50)] public float speed;
     public float speedY;
     
     public int speedX;
 
     public Transform groundCheck;
+
+    public bool isLeft;
 
     private void Initialization()
     {
@@ -62,8 +64,28 @@ public class PlayerController : MonoBehaviour
             speedX = 0;
         }
 
+        if(isLeft && horizontal > 0)
+        {
+            Flip();
+        }
+
+        if(!isLeft && horizontal < 0)
+        {
+            Flip();
+        }
+
         speedY = playerRigidBody2D.velocity.y;
         playerRigidBody2D.velocity = new(horizontal * speed, speedY);
+
+        
+    }
+
+    private void Flip()
+    {
+        isLeft = !isLeft;
+        float scaleX = transform.localScale.x;
+        scaleX *= -1f;
+        transform.localScale = new (scaleX,transform.localScale.y,transform.localScale.z);
     }
 
     private void GroundCheck()
