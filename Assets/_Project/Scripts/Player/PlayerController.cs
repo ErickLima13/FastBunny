@@ -5,28 +5,33 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D playerRigidBody2D;
     private Animator playerAnimator;
-
     private GameManager gameManager;
 
     private float horizontal;
+    private float speedY;
 
     [SerializeField] private bool isOnTheGround;
 
     [Range(0, 1000)] public float jumpForce;
     [Range(0, 50)] public float speed;
-    public float speedY;
     
-    public int speedX;
-
     public Transform groundCheck;
+    public LayerMask groundLayer;
+
+    private int speedX;
+    private int extraJump;
+
+    public int newJump;
 
     public bool isLeft;
 
+  
     private void Initialization()
     {
         gameManager = FindObjectOfType(typeof(GameManager)) as GameManager;
         playerRigidBody2D = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+        extraJump = newJump;
     }
 
     // Start is called before the first frame update
@@ -90,12 +95,22 @@ public class PlayerController : MonoBehaviour
 
     private void GroundCheck()
     {
-        isOnTheGround = Physics2D.OverlapCircle(groundCheck.position, 0.02f);
+        isOnTheGround = Physics2D.OverlapCircle(groundCheck.position, 0.02f,groundLayer);
+
+        if (isOnTheGround)
+        {
+            extraJump = newJump;
+        }
     }
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isOnTheGround)
+        if (Input.GetButtonDown("Jump") && extraJump > 0)
+        {
+            playerRigidBody2D.AddForce(new Vector2(0, jumpForce));
+            extraJump--;
+        }
+        else if(Input.GetButtonDown("Jump") && isOnTheGround && extraJump == 0)
         {
             playerRigidBody2D.AddForce(new Vector2(0, jumpForce));
         }

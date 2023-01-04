@@ -725,7 +725,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4547472421570653275}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7c20c005091697498ce5a8cd0774110, type: 3}
   m_Name: 
@@ -1162,6 +1162,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 996401216874797474, guid: 8229ff07019c16a4fa0a4c958bda432f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 996401216874797475, guid: 8229ff07019c16a4fa0a4c958bda432f, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1235,6 +1239,10 @@ PrefabInstance:
     - target: {fileID: 996401216874797474, guid: 8229ff07019c16a4fa0a4c958bda432f, type: 3}
       propertyPath: m_Name
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 996401216874797474, guid: 8229ff07019c16a4fa0a4c958bda432f, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 996401216874797475, guid: 8229ff07019c16a4fa0a4c958bda432f, type: 3}
       propertyPath: m_RootOrder

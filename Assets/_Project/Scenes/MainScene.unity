@@ -424,11 +424,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOnTheGround: 0
-  jumpForce: 635
+  jumpForce: 400
   speed: 4
-  speedY: 0
-  speedX: 0
   groundCheck: {fileID: 578955231}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  newJump: 0
   isLeft: 0
 --- !u!1 &833533670
 GameObject:
@@ -494,10 +496,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2861904063206964504, guid: de82b5bab4da2404f9cab91d21131515, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4547472421570653274, guid: de82b5bab4da2404f9cab91d21131515, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -545,14 +543,6 @@ PrefabInstance:
     - target: {fileID: 4547472421570653275, guid: de82b5bab4da2404f9cab91d21131515, type: 3}
       propertyPath: m_Name
       value: SceneryA
-      objectReference: {fileID: 0}
-    - target: {fileID: 4547472421570653275, guid: de82b5bab4da2404f9cab91d21131515, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4547472421570653276, guid: de82b5bab4da2404f9cab91d21131515, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de82b5bab4da2404f9cab91d21131515, type: 3}
@@ -661,7 +651,7 @@ GameObject:
   - component: {fileID: 3618132033044936093}
   - component: {fileID: 536430971498241800}
   - component: {fileID: 3618132033044936096}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platformer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
