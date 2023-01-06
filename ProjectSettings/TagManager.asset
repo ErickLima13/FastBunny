@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collectibles
   - Obstacles
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -9,13 +9,16 @@ public class PlayerController : MonoBehaviour
 
     private float horizontal;
     private float speedY;
+    private float nextFire;
 
     [SerializeField] private bool isOnTheGround;
 
     [Range(0, 1000)] public float jumpForce;
     [Range(0, 50)] public float speed;
+    [Range(0, 50)] public float shootSpeed;
     
     public Transform groundCheck;
+    public Transform weapon;
     public LayerMask groundLayer;
 
     private int speedX;
@@ -25,13 +28,17 @@ public class PlayerController : MonoBehaviour
 
     public bool isLeft;
 
-  
+    public GameObject bulletPrefab;
+
+    public float fireRate = 0.5f;
+
     private void Initialization()
     {
         gameManager = FindObjectOfType(typeof(GameManager)) as GameManager;
         playerRigidBody2D = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         extraJump = newJump;
+        
     }
 
     // Start is called before the first frame update
@@ -49,6 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         MovementControl();
         Jump();
+        Shoot();
     }
 
     private void LateUpdate()
@@ -81,8 +89,6 @@ public class PlayerController : MonoBehaviour
 
         speedY = playerRigidBody2D.velocity.y;
         playerRigidBody2D.velocity = new(horizontal * speed, speedY);
-
-        
     }
 
     private void Flip()
@@ -91,6 +97,19 @@ public class PlayerController : MonoBehaviour
         float scaleX = transform.localScale.x;
         scaleX *= -1f;
         transform.localScale = new (scaleX,transform.localScale.y,transform.localScale.z);
+        shootSpeed *= -1f;
+    }
+
+    private void Shoot()
+    {
+        if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            GameObject temp = Instantiate(bulletPrefab);
+            temp.transform.position = weapon.position;
+            temp.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed, 0);
+            Destroy(temp, 2f);
+        }
     }
 
     private void GroundCheck()
