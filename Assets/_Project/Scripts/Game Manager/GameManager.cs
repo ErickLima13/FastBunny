@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [Header("Player Settings")]
     [Range(1, 5)] public float speed;
     public float[] limits;
+    public int munition;
 
     [Header("Scenery Settings")]
     public float objectsSpeed;
@@ -50,6 +51,11 @@ public class GameManager : MonoBehaviour
         score += value;
         //scoreText.text = "Score: " + score.ToString();
         //audioSource.PlayOneShot(scoreSound);
+    }
+
+    public void ManagerMunition(int value)
+    {
+        munition += value;
     }
 
     public void ChangeScene(string scene)

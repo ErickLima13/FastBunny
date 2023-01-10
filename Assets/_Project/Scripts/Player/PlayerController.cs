@@ -1,4 +1,4 @@
-using TMPro;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,14 +9,13 @@ public class PlayerController : MonoBehaviour
 
     private float horizontal;
     private float speedY;
-    private float nextFire;
 
     [SerializeField] private bool isOnTheGround;
 
     [Range(0, 1000)] public float jumpForce;
     [Range(0, 50)] public float speed;
     [Range(0, 50)] public float shootSpeed;
-    
+
     public Transform groundCheck;
     public Transform weapon;
     public LayerMask groundLayer;
@@ -27,10 +26,11 @@ public class PlayerController : MonoBehaviour
     public int newJump;
 
     public bool isLeft;
+    public bool isShoot;
 
     public GameObject bulletPrefab;
 
-    public float fireRate = 0.5f;
+    public float fireRate;
 
     private void Initialization()
     {
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         playerRigidBody2D = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         extraJump = newJump;
-        
+
     }
 
     // Start is called before the first frame update
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if(horizontal != 0)
+        if (horizontal != 0)
         {
             speedX = 1;
         }
@@ -77,12 +77,12 @@ public class PlayerController : MonoBehaviour
             speedX = 0;
         }
 
-        if(isLeft && horizontal > 0)
+        if (isLeft && horizontal > 0)
         {
             Flip();
         }
 
-        if(!isLeft && horizontal < 0)
+        if (!isLeft && horizontal < 0)
         {
             Flip();
         }
@@ -96,15 +96,17 @@ public class PlayerController : MonoBehaviour
         isLeft = !isLeft;
         float scaleX = transform.localScale.x;
         scaleX *= -1f;
-        transform.localScale = new (scaleX,transform.localScale.y,transform.localScale.z);
+        transform.localScale = new(scaleX, transform.localScale.y, transform.localScale.z);
         shootSpeed *= -1f;
     }
 
     private void Shoot()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
+        if (Input.GetButtonDown("Fire1") && !isShoot && gameManager.munition > 0)
         {
-            nextFire = Time.time + fireRate;
+            StartCoroutine(DelayShoot());
+            isShoot = true;
+            gameManager.ManagerMunition(-1);
             GameObject temp = Instantiate(bulletPrefab);
             temp.transform.position = weapon.position;
             temp.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed, 0);
@@ -112,9 +114,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private IEnumerator DelayShoot()
+    {
+        yield return new WaitForSeconds(fireRate);
+        isShoot = false;
+    }
+
     private void GroundCheck()
     {
-        isOnTheGround = Physics2D.OverlapCircle(groundCheck.position, 0.02f,groundLayer);
+        isOnTheGround = Physics2D.OverlapCircle(groundCheck.position, 0.02f, groundLayer);
 
         if (isOnTheGround)
         {
@@ -129,7 +137,7 @@ public class PlayerController : MonoBehaviour
             playerRigidBody2D.AddForce(new Vector2(0, jumpForce));
             extraJump--;
         }
-        else if(Input.GetButtonDown("Jump") && isOnTheGround && extraJump == 0)
+        else if (Input.GetButtonDown("Jump") && isOnTheGround && extraJump == 0)
         {
             playerRigidBody2D.AddForce(new Vector2(0, jumpForce));
         }
@@ -153,13 +161,20 @@ public class PlayerController : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Collectibles":
-                gameManager.AddScore(10);
+
+                IDItem id = collision.gameObject.GetComponent<IDItem>();
+                switch (id.name)
+                {
+                    case "Munition":
+                        gameManager.ManagerMunition(id.amount);
+                        break;
+                }
+
                 Destroy(collision.gameObject);
                 break;
             case "Obstacles":
                 Debug.LogError("PUFT");
                 break;
-
         }
     }
 }
