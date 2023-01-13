@@ -346,7 +346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597799544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 0.8, z: 0}
+  m_LocalPosition: {x: 0.9, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -543,6 +543,7 @@ MonoBehaviour:
   jumpForce: 450
   speed: 5
   shootSpeed: 10
+  parabolForce: {x: 200, y: 600}
   groundCheck: {fileID: 578955231}
   weapon: {fileID: 597799545}
   groundLayer:
@@ -551,7 +552,10 @@ MonoBehaviour:
   newJump: 1
   isLeft: 0
   isShoot: 0
-  bulletPrefab: {fileID: 5448375210695958920, guid: 77e4393d0bc1beb4099ae003bfe09072, type: 3}
+  isParabol: 0
+  weaponPrefabs:
+  - {fileID: 5448375210695958920, guid: 77e4393d0bc1beb4099ae003bfe09072, type: 3}
+  - {fileID: 1513659767856320325, guid: ee114a63839c8c0408812d1373a288aa, type: 3}
   fireRate: 0.3
 --- !u!1 &833533670
 GameObject:

@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [Range(0, 50)] public float speed;
     [Range(0, 50)] public float shootSpeed;
 
+    public Vector2 parabolForce;
+
     public Transform groundCheck;
     public Transform weapon;
     public LayerMask groundLayer;
@@ -27,8 +29,9 @@ public class PlayerController : MonoBehaviour
 
     public bool isLeft;
     public bool isShoot;
+    public bool isParabol;
 
-    public GameObject bulletPrefab;
+    public GameObject[] weaponPrefabs;
 
     public float fireRate;
 
@@ -98,6 +101,7 @@ public class PlayerController : MonoBehaviour
         scaleX *= -1f;
         transform.localScale = new(scaleX, transform.localScale.y, transform.localScale.z);
         shootSpeed *= -1f;
+        parabolForce.x *= -1f;
     }
 
     private void Shoot()
@@ -107,9 +111,20 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(DelayShoot());
             isShoot = true;
             gameManager.ManagerMunition(-1);
-            GameObject temp = Instantiate(bulletPrefab);
+            GameObject temp;
+           
+            if (!isParabol)
+            {
+                temp = Instantiate(weaponPrefabs[0]);
+                temp.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed, 0);
+            }
+            else
+            {
+                temp = Instantiate(weaponPrefabs[1]);
+                temp.GetComponent<Rigidbody2D>().AddForce(parabolForce);
+            }
+
             temp.transform.position = weapon.position;
-            temp.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed, 0);
             Destroy(temp, 2f);
         }
     }
